@@ -1,0 +1,19 @@
+[Unit]
+Description=SysInfo Service
+#Requires=network.target
+#After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/node /home/pi/project/sysinfo/app.js
+WorkingDirectory=/home/pi/project/sysinfo
+Restart=always
+# Restart service after 10 seconds if node service crashes
+RestartSec=10
+# Output to syslog
+StandardOutput=inherit
+StandardError=inherit
+SyslogIdentifier=SysInfo
+Environment=NODE_ENV=production NODE_PATH=/usr/local/lib/node_modules PORT=8089
+
+[Install]
+WantedBy=multi-user.target
